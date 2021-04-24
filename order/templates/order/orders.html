@@ -1,0 +1,140 @@
+{% extends 'order/base.html' %}
+{% load static %}
+{% load custom_tags %}
+{% load location_tags %}
+{% block body_block %}
+
+
+<div class="margin-top-90"></div>
+
+
+<script>
+    "{% if current_category == category.value %}selected {% endif %}"
+    var current_category = "{{ current_category }}";
+    var csrf = '{{ csrf_token }}';
+    var order_url_base = "/orders";
+    var path = "{% url 'order_app:orders' %}";
+    var first_order_path = "{% url 'order_app:add_order' %}";
+    var search_dict = {};
+</script>
+
+<script src="{% static 'order/js/main.js' %}"></script>
+<script src="{% static 'order/js/orders.js' %}"></script>
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-xl-3 col-lg-4">
+            <div class="sidebar-container">
+
+                
+
+
+                <div class="clearfix"></div>
+                
+                <div class="sidebar-widget">
+                    <h3>City</h3>
+                    <select class="city selectpicker" onchange="type_click('city', this.value);">
+                        <option selected value="all">
+                            All cities
+                        </option>
+                        {% get_cities as cities %}
+                        {% for city in cities %}
+                        <option value="{{ city.value }}">
+                            {{ city.name }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                
+                <div class="sidebar-widget">
+                    <h3>Categories</h3>
+                    <select class="category selectpicker" onchange="type_click('category', this.value);">
+                        <option value="all">
+                            All categories
+                        </option>
+                        {% for category in categories %}
+                        <option id="{{ category.value }}" value="{{ category.value }}">
+                            {{ category.name }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div id="subcategory-widget" class="sidebar-widget" style="display: none">
+
+                    <select id="subs" class="subcategory selectpicker"
+                        onchange="type_click('subcategory', this.value);">
+                        <option selected value="all">
+                            All subcategories
+                        </option>
+
+                    </select>
+                </div>
+
+
+
+                
+                <div class="sidebar-widget">
+                    <h3>Payment</h3>
+                    <div class="margin-top-55"></div>
+
+                    <input id="filter-slider" class="range-slider" type="text" value="" data-slider-currency=" USD" data-slider-min="10"
+                        data-slider-max="2500" data-slider-step="25" data-slider-value="[50,2500]" />
+                </div>
+
+
+                <div class="clearfix"></div>
+
+            </div>
+        </div>
+        <div class="col-xl-9 col-lg-8 content-left-offset">
+
+            <h3 class="page-title">Search result</h3>
+            <input type="hidden" class="filter keyword-input-button ripple-effect" />
+
+            <div class="filter-box notify-box margin-top-15" style="display: block">
+                <div class="switch-container">
+ 
+                    <div class="keywords-container">
+                        <div class="keyword-input-container">
+                            <input type="hidden" data-type="" class="filter keyword-input" />
+                        </div>
+                        <div class="keywords-list"></div>
+                    </div>
+                </div>
+
+                 <div class="sort-by">
+                    <span>Sort:</span>
+                    <select class="selectpicker hide-tick">
+                        <option>Actual</option>
+                        <option>New</option>
+                        <option>Old</option>
+                        <option>Random</option>
+                    </select>
+                </div> 
+            </div> 
+
+           
+            <div class="tasks-list-container margin-top-35">
+
+                
+
+                <div id="orders"></div>
+
+                
+                <div class="clearfix"></div>
+                <div class="row">
+                    <div class="col-md-12 paginator">
+
+                    </div>
+                </div>
+                
+            </div>
+        
+
+        </div>
+    </div>
+</div>
+{% endblock %}

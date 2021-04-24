@@ -1,0 +1,182 @@
+{% extends 'base_profile.html' %}
+{% load static %}
+
+{% block content %}
+
+<link rel="stylesheet" href="https://cdn.rawgit.com/enyo/dropzone/master/dist/dropzone.css">
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+<link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.css" />
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/leaflet/1.1.0/leaflet.js"></script>
+
+<script>
+    var csrf = '{{ csrf_token }}';
+</script>
+
+<script src="{% static 'location/js/location.js' %}"></script>
+<script src="{% static 'order/js/main.js' %}"></script>
+<script src="{% static 'order/js/add_order.js' %}"></script>
+
+<!-- Dashboard Headline -->
+<div class="dashboard-headline">
+    <h3>Fill the form</h3>
+
+    <!-- Breadcrumbs -->
+    <nav id="breadcrumbs" class="dark">
+        <ul>
+            <li><a href="{% url 'index' %}">Main page</a></li>
+			<li><a href="{% url 'user_profile_app:profile' %}">Profile</a></li>
+            <li>Create task</li>
+        </ul>
+    </nav>
+</div>
+
+<!-- Row -->
+<div class="row">
+    <form enctype="multipart/form-data" method="POST" id="formid">
+        {% csrf_token %}
+        <!-- Dashboard Box -->
+        <div class="col-xl-12">
+            <div class="dashboard-box margin-top-0">
+
+                <div class="content with-padding padding-bottom-10">
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="submit-field">
+                                <h5>{{ simple_order_form.category.label }}</h5>
+                                {{ simple_order_form.category }}
+                            </div>
+                        </div>
+
+                        <div id="subcategories-main-div" class="col-xl-6">
+                            <div class="submit-field">
+                                <h5>{{ simple_order_form.subcategory.label }}</h5>
+                                {{ simple_order_form.subcategory }}
+                            </div>
+                        </div>
+
+                        <div class="col-xl-12">
+                            <div class="submit-field">
+                                <h5>{{ simple_order_form.name.label }}</h5>
+                                {{ simple_order_form.name }}
+                            </div>
+                        </div>
+
+                        <div class="col-xl-12">
+                            <div class="submit-field">
+                                <h5>{{ simple_order_form.description.label }}</h5>
+                                {{ simple_order_form.description }}
+                            </div>
+                        </div>
+
+                        <div class="col-xl-12">
+                            <div class="submit-field">
+                                <h5>Deadline</h5>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-xl-12">
+                                    <div class="submit-field">
+                                        <div class="input-with-icon-left">
+                                            <i class="icon-material-outline-access-time"></i>
+                                            {{ simple_order_form.time_end }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-12 col-md-12">
+                            <div class="submit-field">
+                                <div class="section-headline margin-top-25 margin-bottom-35">
+                                    <h5>Budget</h5>
+                                </div>
+
+                                <input class="range-slider" type="text" value="50, 5000" data-slider-currency=" USD"
+                                    data-slider-min="50" data-slider-max="5000" data-slider-step="5"
+                                    data-slider-value="[50,5000]" data-value="50,5000" style="display: none;">
+                            </div>
+                        </div>
+
+
+                        <div class="col-xl-12">
+                            <div class="submit-field">
+                                <div class="row">
+                                    <div class="col-xl-4" style="text-align: center;line-height: 50px">
+                                        or you can set exact price
+                                    </div>
+                                    <div class="col-xl-4">
+                                        <div class="submit-field">
+                                            <div class="row">
+                                                <div class="col-xl-12">
+                                                    <div class="input-with-icon price">
+                                                        <input type="text" name="price"
+                                                            class="input input border p-3 w-100 my-2"
+                                                            autocomplete="off">
+                                                        <i class="currency">USD</i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-12">
+                            <div class="submit-field">
+                                <div class="section-headline margin-top-25 margin-bottom-12">
+                                    <h5>Payment type</h5>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="radio">
+                                            <input id="after" name="payment" type="radio" value="postpaid" checked>
+                                            <label for="after" class="payment-type-label"><span
+                                                    class="radio-label"></span> For whole project</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="radio">
+                                            <input id="before" name="payment" type="radio" value="prepaid">
+                                            <label for="before" class="payment-type-label"><span
+                                                    class="radio-label"></span> For every hour</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-4 changing-input-city">
+                            <div class="submit-field">
+                                <h5>{{ simple_order_form.city.label }}</h5>
+                                {{ simple_order_form.city }}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <input type="hidden" value="{{ uuid }}" name="uuid">
+        <input type="hidden" name="lat" id="lat">
+        <input type="hidden" name="lon" id="lon">
+        <input type="hidden" name="is_fixed_price">
+        <input type="hidden" name="price_low">
+        <input type="hidden" name="price_high">
+
+
+        <div class="col-xl-12">
+            <input type="submit" id="submit-form" class="button ripple-effect big margin-top-30" value="Create">
+        </div>
+
+    </form>
+
+</div>
+
+
+{% endblock %}

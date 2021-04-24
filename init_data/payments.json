@@ -1,0 +1,18 @@
+[
+    {
+        "model": "order.payment",
+        "pk": 1,
+        "fields": {
+            "name": "For project",
+            "value": "postpaid"
+        }
+    },
+    {
+        "model": "order.payment",
+        "pk": 2,
+        "fields": {
+            "name": "Per hour",
+            "value": "prepaid"
+        }
+    }
+]

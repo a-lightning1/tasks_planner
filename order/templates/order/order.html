@@ -1,0 +1,261 @@
+{% extends 'order/base.html' %}
+{% load static %}
+{% load custom_tags %}
+{% block body_block %}
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+    crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+    integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+    crossorigin=""></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/leaflet/1.1.0/leaflet.js"></script>
+
+<script>
+    var csrf = '{{ csrf_token }}';
+    var bookmark_url = "{% url 'order_app:bookmark_order' %}";
+    var order_id = "{{ order.id }}";
+</script>
+
+<script src="{% static 'order/js/order.js' %}"></script>
+
+
+<div class="single-page-header" data-background-image="{% static 'images/single-job.jpg' %}">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="single-page-header-inner">
+                    <div class="left-side">
+                        <div class="header-image"><a href="single-company-profile.html"><img
+                                    src="{{ order.customer.user.profile.profile_picture.url }}" alt=""></a></div>
+                        <div class="header-details">
+                            <h3>{{ order.customer.user }}
+                                {% if order.customer.user == user %}
+                                (You)
+                                    <a href="{% url 'order_app:edit_order' %}?id={{ order.id }}">edit task</a>
+                                {% endif %}
+                            </h3>
+                            <h5>Customer</h5>
+                            <ul>
+                                
+                                <li>
+                                    <div class="star-rating" data-rating="{{order.customer.rating}}"></div>
+                                </li>
+                                <li><img class="flag" src="{% static 'images/flags/us.svg' %}" alt=""> USA
+                                </li>
+                                <li>
+                                    <div class="verified-badge-with-title">Verified</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="right-side">
+                        <div class="salary-box">
+                            <div class="salary-type">Payment</div>
+                            <div class="salary-amount">
+                                {% if order.is_fixed_price %}
+                                {{ order.price_high }} USD
+                                {% else %}
+                                {{ order.price_low }}USD - {{ order.price_high }}USD
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="row">
+
+       
+        <div class="col-xl-8 col-lg-8 content-right-offset">
+
+            <h2 class="margin-bottom-25">{{ order.name }}</h2>
+
+
+            {% is_processing order as is_processing_v %}
+            {% is_done order as is_done_v %}
+            {% if is_processing_v or is_done_v %}
+            <div class="boxed-list margin-bottom-60">
+                <div class="boxed-list-headline">
+                    <h3><i class="icon-material-outline-group"></i>{{ order.status }}</h3>
+                </div>
+                <ul class="boxed-list-ul">
+                    <li>
+                        <div class="bid">
+                            
+                            <div class="bids-avatar">
+                                <div class="freelancer-avatar">
+                                    <div class="verified-badge"></div>
+                                    <a href="{{ order.performer.get_absolute_url }}">
+                                        <img src="{{ order.performer.user.profile.profile_picture.url }}" alt="">
+                                    </a>
+                                </div>
+                            </div>
+
+                            
+                            <div class="bids-content">
+                                
+                                <div class="freelancer-name">
+                                    <h4>
+                                        <a href="{{ order.performer.get_absolute_url }}">
+                                            {{ order.performer.user.get_name }}
+                                        </a>
+                                    </h4>
+
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            {% endif %}
+
+            <div class="single-page-section">
+                <table class="basic-table">
+
+
+                    <tr>
+                        <td data-label="Column 1">Deadline</td>
+                        <td data-label="Column 2">{{ order.time_end }}</td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="Column 1">Payment</td>
+                        <td data-label="Column 2">{{ order.payment }}</td>
+                    </tr>
+
+                    <tr>
+                        <td data-label="Column 1">Task description</td>
+                        <td data-label="Column 2">{{ order.description }}</td>
+                    </tr>
+
+                </table>
+            </div>
+
+            <div class="single-page-section">
+                <h3 class="margin-bottom-25">Similar tasks</h3>
+
+                
+                <div class="listings-container grid-layout">
+                    {%for related_order in related_orders%}
+                    
+                    <a href="/orders/{{related_order.id}}" class="job-listing">
+
+                        
+                        <div class="job-listing-details">
+                            
+                            <div class="job-listing-company-logo">
+                                <img src={% if related_order.customer.user.profile.profile_picture %}"{{ related_order.customer.user.profile.profile_picture.url }}" {% else %}{% static 'images/anonymous-user.png' %}{% endif %} alt="">
+                            </div>
+
+                            
+                            <div class="job-listing-description">
+                                <h4 class="job-listing-company">{{related_order.category.name}}</h4>
+                                <h3 class="job-listing-title">{{related_order.name}}</h3>
+                            </div>
+                        </div>
+
+                        
+                        <div class="job-listing-footer">
+                            <ul>
+                                <li><i class="icon-material-outline-location-on"></i> {{related_order.location.city.name}}</li>
+                                <li><i class="icon-material-outline-business-center"></i> {{related_order.payment.name}}</li>
+                                <li><i class="icon-material-outline-account-balance-wallet"></i> {% if order.is_fixed_price %}
+                                    {{ order.price_high }} USD
+                                    {% else %}
+                                    {{ order.price_low }} - {{ order.price_high }} USD
+                                    {% endif %}</li>
+                                <li><i class="icon-material-outline-access-time"></i> {{related_order.time_created}}</li>
+                            </ul>
+                        </div>
+                    </a>
+                    
+                    {% endfor %}
+                    
+                </div>
+            
+
+            </div>
+        </div>
+
+
+        
+        <div class="col-xl-4 col-lg-4">
+            <div class="sidebar-container">
+
+                {% if order.customer.user != user and user.isPerformer %}
+                {% is_respond_tag user order as respond %}
+                {% if respond %}
+
+                <a href="#small-dialog" class="applied" disabled>You have submitted your bid <i class=""></i></a>
+
+                {% else %}
+
+                <a id="{{ order.id }}" href="#" class="apply apply-now-button">Submit a bid<i
+                        class="icon-material-outline-arrow-right-alt"></i></a>
+                {% endif %}
+
+                <a href="{% url 'chat_app:chat' %}?user_id={{ order.customer.user.id }}"
+                    class="apply-now-button">Send a message<i class=""></i></a>
+
+                {% endif %}
+
+                <!-- Sidebar Widget -->
+                <div class="sidebar-widget">
+                    <div class="job-overview">
+                        <div class="job-overview-headline">Common information</div>
+                        <div class="job-overview-inner">
+                            <ul>
+                                <li>
+                                    <i class="icon-material-outline-business-center"></i>
+                                    <span>Category</span>
+                                    <h5>{{ order.category }}</h5>
+                                    <h6>{{ order.subcategory }}</h6>
+                                </li>
+                                <li>
+                                    <i class="icon-material-outline-access-time"></i>
+                                    <span>Created</span>
+                                    <h5>{{ order.time_created }}</h5>
+                                </li>
+                                <li>
+                                    <i class="icon-material-outline-face"></i>
+                                    <span>Views</span>
+                                    <h5>{{ order.views }}</h5>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    $(".apply").on("click", function (e) {
+        var csrftoken = "{{ csrf_token }}";
+        $.ajax({
+            type: "POST",
+            url: "{% url 'order_app:respond' %}",
+            data: {
+                csrfmiddlewaretoken: csrftoken,
+                'id': $(this).attr('id'),
+            },
+            success: function (data) {
+                window.location.replace("{% url 'order_app:orders' %}")
+            }
+        })
+    })
+</script>
+
+{% endblock %}

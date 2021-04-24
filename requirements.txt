@@ -1,0 +1,9 @@
+Django
+Pillow
+django-imagekit
+django-material
+python-memcached
+django-notifications-hq
+djangorestframework
+social-auth-app-django
+social-auth-core

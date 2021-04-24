@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load notifications_custom_tags %}
+
+{% block body_block %}
+<div class="dashboard-container">
+
+
+	<div class="dashboard-sidebar">
+		<div class="dashboard-sidebar-inner" data-simplebar>
+			<div class="dashboard-nav-container">
+
+
+				<a href="#" class="dashboard-responsive-nav-trigger">
+					<span class="hamburger hamburger--collapse">
+						<span class="hamburger-box">
+							<span class="hamburger-inner"></span>
+						</span>
+					</span>
+					<span class="trigger-title">Profile navigation</span>
+				</a>
+
+				
+				<div class="dashboard-nav">
+					<div class="dashboard-nav-inner">
+
+						<ul data-submenu-title="Main">
+							<li id="profile_menu"><a href="{% url 'user_profile_app:profile' %}"><i class="icon-material-outline-dashboard"></i>
+									Profile</a></li>
+							<li id="chat_menu"><a href="{% url 'chat_app:chat' %}"><i
+										class="icon-material-outline-question-answer" ></i>
+									Message <span id="message-i-profile"></span></a></li>
+
+							{% if user.isPerformer %}
+							<li id="order_response_menu"><a href="{% url 'performer_app:orders' %}"><i
+										class="icon-material-outline-business-center"></i>My tasks</a>
+								{% endif %}
+						</ul>
+
+						{% if user.isCustomer %}
+						<ul data-submenu-title="Task management">
+							<li id="orders_menu"><a href="#"><i class="icon-material-outline-business-center"></i>Tasks</a>
+								<ul>
+									<li><a href="{% url 'customer_app:orders' %}">
+											My tasks
+											
+										</a></li>
+									
+									<li><a href="{% url 'order_app:add_order' %}">Create task</a></li>
+
+								</ul>
+							</li>
+						</ul>
+						{% endif %}
+
+						<ul data-submenu-title="Account">
+							<li id="settings_menu"><a href="#"><i class="icon-material-outline-settings"></i>Settings</a>
+                                <ul>
+                                    <li>
+                                        <a href="{% url 'user_profile_app:basic_settings' %}">
+                                            Main</a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'user_profile_app:privacy_settings' %}">
+                                            Privacy and security</a>
+                                    </li>
+                                </ul>
+                            </li>
+							<li><a href="{% url 'authentication_app:logout' %}"><i
+										class="icon-material-outline-power-settings-new"></i>
+									Sign out</a></li>
+						</ul>
+
+					</div>
+				</div>
+				
+
+			</div>
+		</div>
+	</div>
+    <div class="dashboard-content-container" data-simplebar>
+        <div class="dashboard-content-inner" >
+	
+                {% block content %}
+                {% endblock %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

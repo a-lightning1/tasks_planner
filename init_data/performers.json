@@ -1,0 +1,92 @@
+[
+    {
+    "model": "performer.performer",
+    "pk": 1,
+    "fields": {
+        "user":3,
+        "num_responses":10,
+        "sum_rating":41
+    }
+},
+{
+    "model": "performer.performer",
+    "pk": 2,
+    "fields": {
+        "user":4,
+        "num_responses":5,
+        "sum_rating":25
+    }
+},
+    {
+    "model": "performer.performer",
+    "pk": 3,
+    "fields": {
+        "user":6,
+        "num_responses":5,
+        "sum_rating":25
+    }
+},
+    {
+    "model": "performer.performer",
+    "pk": 4,
+    "fields": {
+        "user":8,
+        "num_responses":5,
+        "sum_rating":22
+    }
+},
+    {
+    "model": "performer.performer",
+    "pk": 5,
+    "fields": {
+        "user":10,
+        "num_responses":5,
+        "sum_rating":23
+    }
+},
+    {
+    "model": "performer.performer",
+    "pk": 6,
+    "fields": {
+        "user":13,
+        "num_responses":7,
+        "sum_rating":30
+    }
+},
+    {
+    "model": "performer.performer",
+    "pk": 7,
+    "fields": {
+        "user":17,
+        "num_responses":6,
+        "sum_rating":25
+    }
+},
+    {
+    "model": "performer.performer",
+    "pk": 8,
+    "fields": {
+        "user":18,
+        "num_responses":20,
+        "sum_rating":75
+    }
+},
+    {
+    "model": "performer.performer",
+    "pk": 9,
+    "fields": {
+        "user":19,
+        "num_responses":11,
+        "sum_rating":40
+    }
+},
+    {
+    "model": "performer.performer",
+    "pk": 10,
+    "fields": {
+        "user":20,
+        "num_responses":14,
+        "sum_rating":47
+    }
+}
+]

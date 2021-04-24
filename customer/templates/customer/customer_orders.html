@@ -1,0 +1,103 @@
+{% extends 'base_profile.html' %}
+{% load static %}
+{% load custom_tags %}
+
+{% block content %}
+
+
+
+<div class="dashboard-headline">
+
+    <nav id="breadcrumbs" class="dark">
+        <ul>
+            <li><a href="{% url 'index' %}">Main page</a></li>
+			<li><a href="{% url 'user_profile_app:profile' %}">Profile</a></li>
+            <li>Tasks</li>
+        </ul>
+    </nav>
+</div>
+
+
+<div class="row">
+
+   
+    <div class="col-xl-12">
+        <div class="dashboard-box margin-top-0">
+
+          
+            <div class="headline">
+                <h3><i class="icon-material-outline-business-center"></i> My tasks</h3>
+            </div>
+
+            <div class="content">
+                <ul class="dashboard-box-list">
+
+                    {% for order in orders %}
+                    <li>
+                        
+                        <div class="job-listing">
+
+                            
+                            <div class="job-listing-details">
+
+                                
+                                <div class="job-listing-description">
+                                    <h3 class="job-listing-title"><a
+                                            href="{% url 'order_app:order' order.id %}">{{ order.name }}</a>
+                                        <span
+                                            class="dashboard-status-button {% order_status_style order.status %}">{{ order.status }}</span>
+                                    </h3>
+
+
+                                    
+                                    <div class="job-listing-footer">
+                                        <ul>
+                                            <li><i class="icon-material-outline-date-range"></i>Created:
+                                                {{ order.time_created }}</li>
+                                         
+                                            <li><i class="icon-material-outline-date-range"></i> Deadline:
+                                                {{ order.time_end }}</li>
+                                        </ul>
+
+                                        {% if order.performer %}
+                                        <p>
+                                            <mark>Employee:</mark>
+                                            <a href="#">{{ order.performer.user }}</a>
+                                        </p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {% responds_tag order as responds %}
+                        
+                        <div class="buttons-to-right always-visible">
+                            <a href="{% url 'performer_app:candidates' %}?id={{ order.id }}"
+                                class="button ripple-effect"><i class="icon-material-outline-supervisor-account"></i>
+                                Watch employees
+                                <span class="button-info">{{ responds }}</span></a>
+
+
+                            {% new_responds_tag order as new_responds %}
+                            {% if new_responds > 0 %}
+                            <a href="#" class="button gray">New Employees: {{ new_responds }}</a>
+                            {% endif %}
+                            
+                        </div>
+                    </li>
+
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+    $("#orders_menu").toggleClass("active");
+</script>
+
+{% endblock %}

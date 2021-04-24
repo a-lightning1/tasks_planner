@@ -1,0 +1,89 @@
+{% extends 'base_user_page.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+
+        
+        <div class="col-xl-8 col-lg-8 content-right-offset">
+            	<div class="col-xl-12">
+
+
+                  <div class="single-page-section margin-top-20">
+                <h1 class="margin-bottom-25">About me</h1>
+                <p>{{ performer.user.profile.about }}</p>
+            </div>
+
+
+				</div>
+            
+            <div class="boxed-list margin-bottom-60">
+                <div class="boxed-list-headline">
+                    <h3><i class="icon-material-outline-thumb-up"></i> Task history</h3>
+                </div>
+                <ul class="boxed-list-ul">
+                    {%for done_order in done_orders%}
+                    <li>
+                        <div class="boxed-list-item">
+                            
+                            <div class="item-content">
+                                <h4>{{done_order.name}} <span>{{done_order.category.name}}</span></h4>
+                                <div class="item-details margin-top-10">
+
+                                    <div class="detail-item"><i class="icon-material-outline-date-range"></i> {{done_order.time_created}}</div>
+                                </div>
+                                <div class="item-description">
+                                    <p>{{done_order.about}} </p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    {%endfor%}
+                </ul>
+
+                
+                <div class="clearfix"></div>
+                <div class="pagination-container margin-top-40 margin-bottom-10">
+                    <nav class="pagination">
+                        <ul>
+                            <li><a href="#" class="ripple-effect current-page">1</a></li>
+                            <li><a href="#" class="ripple-effect">2</a></li>
+                            <li class="pagination-arrow"><a href="#" class="ripple-effect"><i
+                                        class="icon-material-outline-keyboard-arrow-right"></i></a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="clearfix"></div>
+                
+
+            </div>
+           
+
+        </div>
+
+
+        
+        <div class="col-xl-4 col-lg-4">
+            <div class="sidebar-container">
+
+               
+
+                <a href="/chat/?user_id={{ performer.user.id }}" class="apply-now-button margin-bottom-50">Send message <i
+                        class="icon-material-baseline-mail-outline"></i></a>
+
+                
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<div class="margin-top-15"></div>
+
+
+{% endblock %}

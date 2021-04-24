@@ -1,0 +1,145 @@
+{% extends 'performer/base.html' %}
+{% load static %}
+
+{% block body_block %}
+
+<div class="margin-top-90"></div>
+
+
+
+<div class="container">
+	<div class="row">
+		<div class="col-xl-3 col-lg-4">
+			<div class="sidebar-container">
+
+				
+				<div class="sidebar-widget">
+					<h3>City</h3>
+					<div class="input-with-icon">
+						<div id="autocomplete-container">
+							<input id="autocomplete-input" type="text" placeholder="City">
+						</div>
+						<i class="icon-material-outline-location-on"></i>
+					</div>
+				</div>
+
+			
+
+
+				
+				<div class="sidebar-widget">
+					<h3>Payment</h3>
+					<div class="margin-top-55"></div>
+
+					
+					<input class="range-slider" type="text" value="" data-slider-currency="" data-slider-min="50" data-slider-max="5000" data-slider-step="5" data-slider-value="[50,5000]"/>
+				</div>
+
+				
+				<div class="sidebar-widget">
+					<h3>Categories</h3>
+					{%for category in categories%}
+					<div class="tags-container">
+						<div class="tag">
+							<input type="checkbox" id="tag{{category.id}}"/>
+							<label for="tag{{category.id}}">{{category.name}}</label>
+						</div>
+					</div>
+					{%endfor%}
+					<div class="clearfix"></div>
+
+					
+					
+				</div>
+				<div class="clearfix"></div>
+
+			</div>
+		</div>
+		<div class="col-xl-9 col-lg-8 content-left-offset">
+
+			<h3 class="page-title">Search Results</h3>
+
+			<div class="notify-box margin-top-15">
+				
+
+				<div class="sort-by">
+					<span>Sort:</span>
+					<select class="selectpicker hide-tick">
+						<option>Actual</option>
+                        <option>New</option>
+                        <option>Old</option>
+                        <option>Random</option>
+					</select>
+				</div>
+			</div>
+
+			
+			<div class="freelancers-container freelancers-list-layout margin-top-35">
+
+                {% for performer in performers %}
+                    	
+				<div class="freelancer">
+
+					
+					<div class="freelancer-overview">
+						<div class="freelancer-overview-inner">
+
+							
+							<span class="bookmark-icon"></span>
+
+							
+							<div class="freelancer-avatar status-online">
+								{% if performer.user.profile.online%}
+                                    <div class="online-badge"></div>
+                                {% else %}
+                                    <div class="offline-badge"></div>
+                                {% endif %}
+								    <a href="{{ performer.get_absolute_url }}"><img src="{{ performer.user.profile.profile_picture.url }}" alt=""></a>
+							</div>
+
+							
+							<div class="freelancer-name">
+								<h4><a href="#">{{ performer.user.first_name }} {{ performer.user.last_name }}<img class="flag" src="{% static 'images/flags/us.svg' %}" alt="" title="USA" data-tippy-placement="top"></a></h4>
+		
+
+							</div>
+						</div>
+					</div>
+
+
+				</div>
+                    
+                {% endfor %}
+
+
+
+			</div>
+			
+
+
+			
+			<div class="clearfix"></div>
+			<div class="row">
+				<div class="col-md-12">
+					
+					<div class="pagination-container margin-top-40 margin-bottom-60">
+						<nav class="pagination">
+							<ul>
+								<li class="pagination-arrow"><a href="#" class="ripple-effect"><i class="icon-material-outline-keyboard-arrow-left"></i></a></li>
+								<li><a href="#" class="current-page ripple-effect">1</a></li>
+								<li><a href="#" class="ripple-effect">2</a></li>
+								<li><a href="#" class="ripple-effect">3</a></li>
+								<li><a href="#" class="ripple-effect">4</a></li>
+								<li class="pagination-arrow"><a href="#" class="ripple-effect"><i class="icon-material-outline-keyboard-arrow-right"></i></a></li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+			
+
+		</div>
+	</div>
+</div>
+
+{% endblock %}

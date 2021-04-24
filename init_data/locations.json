@@ -1,0 +1,102 @@
+[
+{
+  "model": "location.location",
+  "pk": 1,
+  "fields": {
+    "lat": 40.69346226258047,
+    "lon": -73.81630177067,
+    "city": 1,
+    "address": "South Richmond Hill, NY 11419"
+  }
+},
+  {
+  "model": "location.location",
+  "pk": 2,
+  "fields": {
+    "lat": 42.69346226258047,
+    "lon": -74.81630177067,
+    "city": 1,
+    "address": "South Richmond Hill, NY 11421"
+  }
+},
+  {
+  "model": "location.location",
+  "pk": 3,
+  "fields": {
+    "lat": 142.69346226258047,
+    "lon": -74.12323232,
+    "city": 2,
+    "address": "32 ST"
+  }
+},
+  {
+  "model": "location.location",
+  "pk": 4,
+  "fields": {
+    "lat": 15.69346226258047,
+    "lon": -23.12323232,
+    "city": 4,
+    "address": "111 Green avenue"
+  }
+},
+  {
+  "model": "location.location",
+  "pk": 5,
+  "fields": {
+    "lat": 25.2321,
+    "lon": -21.12323232,
+    "city": 5,
+    "address": "24 Blue avenue"
+  }
+},
+{
+  "model": "location.location",
+  "pk": 6,
+  "fields": {
+    "lat": 40.704553694414365,
+    "lon":  -73.80225959957366,
+    "city": 1,
+    "address": "153-14 90th Ave"
+  }
+},
+{
+  "model": "location.location",
+  "pk": 7,
+  "fields": {
+    "lat": 40.69346226258047,
+    "lon": -73.81630177067,
+    "city": 1,
+    "address": "South Richmond Hill, NY 11419"
+  }
+},
+  {
+  "model": "location.location",
+  "pk": 8,
+  "fields": {
+    "lat": 41.99,
+    "lon": -73.93423,
+    "city": 1,
+    "address": "South Richmond"
+  }
+},
+  {
+  "model": "location.location",
+  "pk": 9,
+  "fields": {
+    "lat": 42.99,
+    "lon": -71.93423,
+    "city": 1,
+    "address": "14 street"
+  }
+},
+  {
+  "model": "location.location",
+  "pk": 10,
+  "fields": {
+    "lat": 42.45,
+    "lon": -71.78,
+    "city": 1,
+    "address": "28 street"
+  }
+}
+]

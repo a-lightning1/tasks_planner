@@ -1,0 +1,34 @@
+[
+    {
+        "model": "order.orderstatus",
+        "pk": 1,
+        "fields": {
+            "name": "Active",
+            "value": "active"
+        }
+    },
+    {
+        "model": "order.orderstatus",
+        "pk": 2,
+        "fields": {
+            "name": "Performing",
+            "value": "processing"
+        }
+    },
+    {
+        "model": "order.orderstatus",
+        "pk": 3,
+        "fields": {
+            "name": "Done",
+            "value": "done"
+        }
+    },
+    {
+        "model": "order.orderstatus",
+        "pk": 4,
+        "fields": {
+            "name": "Canceled",
+            "value": "canceled"
+        }
+    }
+]

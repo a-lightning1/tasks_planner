@@ -1,0 +1,102 @@
+[
+    {
+        "model": "location.city",
+        "pk": 1,
+        "fields": {
+            "name": "New York",
+            "value": "new_york",
+            "lat": "40.70607616245677",
+            "lon": "-74.03974362846412"
+        }
+    },
+    {
+        "model": "location.city",
+        "pk": 2,
+        "fields": {
+            "name": "Los Angeles",
+            "value": "los_angeles",
+            "lat": "34.09004125868023",
+            "lon": "-118.27399478198325"
+        }
+    },
+    {
+        "model": "location.city",
+        "pk": 3,
+        "fields": {
+            "name": "San Francisco",
+            "value": "san_francisco",
+            "lat": "37.77383775742291",
+            "lon": "-122.42295944842442"
+        }
+    },
+    {
+        "model": "location.city",
+        "pk": 4,
+        "fields": {
+            "name": "Chicago",
+            "value": "chicago",
+            "lat": "41.82202679611478",
+            "lon": "-87.68747122731415"
+        }
+    },
+    {
+        "model": "location.city",
+        "pk": 5,
+        "fields": {
+            "name": "Seattle",
+            "value": "seattle",
+            "lat": "47.611940992111386",
+            "lon": "-122.33800195974179"
+        }
+    },
+    {
+        "model": "location.city",
+        "pk": 6,
+        "fields": {
+            "name": "Phoenix",
+            "value": "phoenix",
+            "lat": "47.611940992111386",
+            "lon": "-122.33800195974179"
+        }
+    },
+    {
+        "model": "location.city",
+        "pk": 7,
+        "fields": {
+            "name": "Philadelphia",
+            "value": "philadelphia",
+            "lat": "47.611940992111386",
+            "lon": "-122.33800195974179"
+        }
+    },
+    {
+        "model": "location.city",
+        "pk": 8,
+        "fields": {
+            "name": "San Diego",
+            "value": "san_diego",
+            "lat": "47.611940992111386",
+            "lon": "-122.33800195974179"
+        }
+    },
+    {
+        "model": "location.city",
+        "pk": 9,
+        "fields": {
+            "name": "Dallas",
+            "value": "dallas",
+            "lat": "47.611940992111386",
+            "lon": "-122.33800195974179"
+        }
+    },
+    {
+        "model": "location.city",
+        "pk": 10,
+        "fields": {
+            "name": "Houston",
+            "value": "houston",
+            "lat": "47.611940992111386",
+            "lon": "-122.33800195974179"
+        }
+    }
+]

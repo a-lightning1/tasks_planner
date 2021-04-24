@@ -1,0 +1,82 @@
+[
+    {
+    "model": "customer.customer",
+    "pk": 1,
+    "fields": {
+        "user":2,
+        "rating":4.3
+    }
+},
+{
+    "model": "customer.customer",
+    "pk": 2,
+    "fields": {
+        "user":11,
+        "rating":3.5
+    }
+},
+    {
+    "model": "customer.customer",
+    "pk": 3,
+    "fields": {
+        "user":5,
+        "rating":3.5
+    }
+},
+    {
+    "model": "customer.customer",
+    "pk": 4,
+    "fields": {
+        "user":7,
+        "rating":3
+    }
+},
+    {
+    "model": "customer.customer",
+    "pk": 5,
+    "fields": {
+        "user":9,
+        "rating":4
+    }
+},
+    {
+    "model": "customer.customer",
+    "pk": 6,
+    "fields": {
+        "user":1,
+        "rating":5
+    }
+},
+{
+    "model": "customer.customer",
+    "pk": 7,
+    "fields": {
+        "user":12,
+        "rating":2.5
+    }
+},
+{
+    "model": "customer.customer",
+    "pk": 8,
+    "fields": {
+        "user":14,
+        "rating":4.7
+    }
+},
+{
+    "model": "customer.customer",
+    "pk": 9,
+    "fields": {
+        "user":15,
+        "rating":4.3
+    }
+},
+{
+    "model": "customer.customer",
+    "pk": 10,
+    "fields": {
+        "user":16,
+        "rating":3.7
+    }
+}
+]

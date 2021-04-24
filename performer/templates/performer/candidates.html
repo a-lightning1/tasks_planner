@@ -1,0 +1,122 @@
+{% extends 'base_profile.html' %}
+{% load static %}
+{% load custom_tags %}
+
+{% block content %}
+
+        
+        <div class="dashboard-headline">
+            <h3>Manage Candidates</h3>
+            <span class="margin-top-7">Bids for <a href="#">{{ order.name }}</a></span>
+
+            
+            <nav id="breadcrumbs" class="dark">
+                <ul>
+                    <li><a href="{% url 'index' %}">Main page</a></li>
+			        <li><a href="{% url 'user_profile_app:profile' %}">Profile</a></li>
+                    <li>Manage tasks</li>
+                </ul>
+            </nav>
+        </div>
+
+        
+        <div class="row">
+
+            
+            <div class="col-xl-12">
+                <div class="dashboard-box margin-top-0">
+
+                    
+                    <div class="headline">
+                        <h3><i class="icon-material-outline-supervisor-account"></i>Available employees:
+                            {{ performers|length }} </h3>
+                    </div>
+
+                    {% is_active order as active %}
+
+                    <div class="content">
+                        <ul class="dashboard-box-list">
+                            {% for performer in performers %}
+                            <li>
+                                
+                                <div class="freelancer-overview manage-candidates">
+                                    <div style="display:flex;justify-content:flex-start">
+                                        <div class="freelancer-overview-inner">
+
+                                            
+                                            <div class="freelancer-avatar">
+                                                <div class="verified-badge"></div>
+                                                <a href="#"><img src="{{ performer.user.profile.profile_picture.url }}"
+                                                        alt=""></a>
+                                            </div>
+
+                                           
+                                            <div class="freelancer-name">
+                                                <h4><a href="#">{{ performer.user.first_name }}
+                                                        {{ performer.user.last_name }}</a></h4>
+
+                                                
+                                                <span class="freelancer-detail-item"><i class="icon-feather-phone"></i>
+                                                    {{ performer.user.profile.phone_number}}</span>
+
+                                               
+                                                <div class="freelancer-rating">
+                                                    <div class="star-rating" data-rating="5.0"><span
+                                                            class="star"></span><span class="star"></span><span
+                                                            class="star"></span><span class="star"></span><span
+                                                            class="star"></span>
+                                                    </div>
+                                                </div>
+
+                        
+                                                <div
+                                                    class="buttons-to-right always-visible margin-top-25 margin-bottom-5">
+                                                    {% if active %}
+                                                    <a id="{{ performer.id }}" href="#"
+                                                        class="confirm button ripple-effect"><i
+                                                            class="icon-feather-file-text"></i>
+                                                        Accept</a>
+                                                    {% endif %}
+                                                    <a href="{% url 'chat_app:chat' %}?user_id={{ performer.user.id }}"
+                                                        class="button dark ripple-effect"><i
+                                                            class="icon-feather-mail"></i> Send message</a>
+
+
+                                                </div>
+                                            </div>
+                                            <div style="vertical-align: top; padding: 20px">
+                                        
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            {% endfor %}
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+       
+
+
+<script>
+    $(".confirm").on("click", function (e) {
+        var csrf = '{{ csrf_token }}';
+        $.ajax({
+            type: "POST",
+            url: "{% url 'order_app:confirm' %}",
+            data: {
+                csrfmiddlewaretoken: csrf,
+                'performer_id': $(this).attr('id'),
+                'order_id': "{{ order.id }}"
+            },
+            success: function (data) {
+                window.location.replace("{% url 'user_profile_app:profile' %}")
+            }
+        });
+    });
+</script>
+{% endblock %}

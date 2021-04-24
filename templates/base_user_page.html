@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block body_block %}
+{% load static %}
+
+
+<div class="single-page-header freelancer-header" data-background-image="images/single-freelancer.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="single-page-header-inner">
+                    <div class="left-side">
+                        <div class="header-image freelancer-avatar"><img src="{{ performer.user.profile.profile_picture.url }}" alt="">
+                        </div>
+                        <div class="header-details">
+                            <h3>{{ performer.user.get_name }} {% if user == performer.user %}(You){% endif %} <span>{% else %}Person{% endif %}</span></h3>
+                            <ul>
+
+                                {% if performer.user.profile.location %}<li><img class="flag" src="{% static 'images/flags/us.svg' %}" alt=""> {{ performer.user.profile.location.city.name }}</li>{% endif %}
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block content %}
+{% endblock %}
+
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends 'base_profile.html' %}
+{% load static %}
+{% load custom_tags %}
+
+{% block content %}
+
+        
+        <div class="dashboard-headline">
+            
+
+            
+            <nav id="breadcrumbs" class="dark">
+                <ul>
+                    <li><a href="{% url 'index' %}">Main page</a></li>
+			        <li><a href="{% url 'user_profile_app:profile' %}">Profile</a></li>
+                    <li>My tasks</li>
+                </ul>
+            </nav>
+        </div>
+
+        
+        <div class="row">
+
+            
+            <div class="col-xl-12">
+                <div class="dashboard-box margin-top-0">
+
+                    
+                    <div class="headline">
+                        <h3><i class="icon-material-outline-gavel"></i> My tasks</h3>
+                    </div>
+
+                    <div class="content">
+                        <ul class="dashboard-box-list">
+                            {% for respond in responds %}
+                            <li>
+                                
+                                <div class="job-listing width-adjustment">
+
+                                    
+                                    <div class="job-listing-details">
+
+                                        
+                                        <div class="job-listing-description">
+                                            <h3 class="job-listing-title"><a href="{% url 'order_app:order' respond.order.id %}">{{ respond.order.name }}</a>
+                                                <span
+                                                    class="dashboard-status-button {% order_status_style respond.order.status %}">{{ respond.status }}</span>
+                                            </h3>
+                                            <div class="job-listing-footer">
+                                                <ul>
+                                                    <li><i class="icon-material-outline-date-range"></i> Deadline:
+                                                        {{ respond.order.time_end }}</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                              
+                                <ul class="dashboard-task-info">
+                                    <li><strong>
+                                        {% if respond.order.is_fixed_price %}
+                                        {{ respond.order.price_high }}$
+                                        {% else %}
+                                        {{ respond.order.price_low }}$ - {{ respond.order.price_high }}$
+                                        {% endif %}
+                                    </strong></li>
+
+                                </ul>
+
+
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+    <script>
+  $("#order_response_menu").toggleClass("active");
+    </script>
+{% endblock %}

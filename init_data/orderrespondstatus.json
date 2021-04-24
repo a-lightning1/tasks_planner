@@ -1,0 +1,34 @@
+[
+    {
+        "model": "order.orderrespondstatus",
+        "pk": 1,
+        "fields": {
+            "name": "Waiting for approval",
+            "value": "new"
+        }
+    },
+    {
+        "model": "order.orderrespondstatus",
+        "pk": 2,
+        "fields": {
+            "name": "Reviewed by customer",
+            "value": "viewed"
+        }
+    },
+    {
+        "model": "order.orderrespondstatus",
+        "pk": 3,
+        "fields": {
+            "name": "Rejected",
+            "value": "rejected"
+        }
+    },
+    {
+        "model": "order.orderrespondstatus",
+        "pk": 4,
+        "fields": {
+            "name": "Accepted",
+            "value": "accepted"
+        }
+    }
+]
